@@ -1,13 +1,8 @@
 #ifndef _OBJECT_HPP_
 #define _OBJECT_HPP_
 
-class Object
-{
-private:
-    /* data */
-public:
-    Object(/* args */) {}
-    ~Object() {}
-};
+#include <variant>
+
+using Object = std::variant<std::monostate, float, std::string>;
 
 #endif // !_OBJECT_HPP_

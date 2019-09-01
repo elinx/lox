@@ -1,10 +1,11 @@
 #ifndef _LOX_HPP_
 #define _LOX_HPP_
 
-#include "scanner.hpp"
+#include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <algorithm>
+
+#include "scanner.hpp"
 
 class Lox {
 private:
