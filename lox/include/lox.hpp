@@ -1,9 +1,10 @@
 #ifndef _LOX_HPP_
 #define _LOX_HPP_
 
+#include "scanner.hpp"
 #include <fstream>
 #include <iostream>
-#include <string>
+#include <algorithm>
 
 class Lox {
 private:
@@ -11,14 +12,14 @@ public:
   Lox() = default;
   ~Lox() = default;
 
-  void runFile(std::string path) {
+  static void runFile(std::string path) {
     std::string input;
     std::ifstream ifs(path, std::ios::binary);
     ifs >> input;
     run(input);
   }
 
-  void runPrompt() {
+  static void runPrompt() {
     for (;;) {
       std::cout << "> ";
       std::string input;
@@ -27,7 +28,23 @@ public:
     }
   }
 
-  void run(std::string &input) {}
+  static void run(std::string &source) {
+    Scanner scanner(source);
+    std::list<Token> tokens = scanner.scanTokens();
+    for (auto token : tokens) {
+      std::cout << token << std::endl;
+    }
+  }
+
+  static void error(size_t line, std::string message) {
+    report(line, "", message);
+  }
+
+  static void report(size_t line, std::string where, std::string message) {
+    std::cout << "[line " + std::to_string(line) + "] Error" + where + ": " +
+                     message
+              << "\n";
+  }
 };
 
 #endif
