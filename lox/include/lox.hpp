@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "scanner.hpp"
+#include "parser.hpp"
 
 class Lox {
 private:
