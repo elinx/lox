@@ -106,6 +106,9 @@ public:
       : _type(type), _lexeme(lexeme), _literal(literal), _line(line),
         _start(start), _len(len) {}
 
+  TokenType type() { return _type; }
+  Object literal() { return _literal; }
+
   friend std::ostream &operator<<(std::ostream &os, const Token &token);
 
 private:
