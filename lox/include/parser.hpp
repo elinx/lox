@@ -20,8 +20,8 @@
  */
 class Parser {
 public:
-  Parser(std::list<Token> tokens) : _tokens(tokens) {}
-
+  Parser(std::list<Token> tokens) : _tokens(tokens), _current(0) {}
+  Expr *parse() { return expression(); }
 private:
   Expr *expression() { return equality(); }
 
@@ -126,9 +126,14 @@ private:
       consume(TK_RIGHT_PAREN, "Expect ')' after expression.");
       return new Grouping(expr);
     }
+    return nullptr;
   }
 
-  Token consume(TokenType, std::string str) {}
+  Token consume(TokenType type, std::string str) {
+    if (check(type)) { return advance(); }
+    std::cout << "parse error\n";
+    exit(1);
+  }
 
 private:
   std::list<Token> _tokens;

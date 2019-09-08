@@ -18,6 +18,10 @@ public:
   virtual void accept(Visitor &visitor) override {
     visitor.visit(*this);
   }
+
+  Expr *left() { return _left; }
+  std::string lexme() { return _operator.lexme(); }
+  Expr *right() { return _right; }
 private:
   Expr *_left;
   Token _operator;
@@ -80,6 +84,8 @@ public:
   virtual void accept(Visitor &visitor) override {
     visitor.visit(*this);
   }
+
+  std::string toString() { return " "; }
 private:
   Object _value;
 };

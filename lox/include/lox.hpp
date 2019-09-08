@@ -7,6 +7,7 @@
 
 #include "scanner.hpp"
 #include "parser.hpp"
+#include "ast_visitor.hpp"
 
 class Lox {
 private:
@@ -36,6 +37,12 @@ public:
     for (auto token : tokens) {
       std::cout << token << std::endl;
     }
+
+    Parser parser(tokens);
+    Expr *expr = parser.parse();
+    AstVisitor vis;
+    vis.print(expr);
+    std::cout << vis.result() << std::endl;
   }
 
   static void error(size_t line, std::string message) {
