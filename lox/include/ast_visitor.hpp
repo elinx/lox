@@ -8,7 +8,7 @@ class AstVisitor : public Visitor {
 public:
   void print(Expr *expr) { expr->accept(*this); }
   virtual void visit(Binary &expr) {
-    parenthesize(expr.lexme(), {expr.left(), expr.right()});
+    parenthesize(expr.lexme(), expr.left(), expr.right());
   }
   virtual void visit(Assign &expr) {}
   virtual void visit(Call &expr) {}
@@ -35,6 +35,11 @@ private:
       _result += vis.result();
     }
     _result += ")";
+  }
+
+  template<typename... Ts>
+  void parenthesize(std::string name, Ts&&... exprs) {
+    parenthesize(name, {std::forward<Ts>(exprs)...});
   }
 private:
   std::string _result;
