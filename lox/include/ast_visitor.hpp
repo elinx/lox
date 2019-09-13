@@ -8,14 +8,13 @@ class AstVisitor : public Visitor {
 public:
   void print(Expr *expr) { expr->accept(*this); }
   virtual void visit(Binary &expr) {
-    parenthesize("", {expr.left(), expr.right()});
+    parenthesize(expr.lexme(), {expr.left(), expr.right()});
   }
   virtual void visit(Assign &expr) {}
   virtual void visit(Call &expr) {}
   virtual void visit(Get &expr) {}
   virtual void visit(Grouping &expr) {}
   virtual void visit(Literal &expr) {
-    _result += " [Literal] ";
     _result += expr.toString();
   }
   virtual void visit(Logical &expr) {}
@@ -28,7 +27,7 @@ public:
   std::string result() { return _result; }
 private:
   void parenthesize(std::string name, std::initializer_list<Expr*> exprs) {
-    _result += "(";
+    _result += "(" + name;
     for (auto expr: exprs) {
       _result += " ";
       AstVisitor vis;

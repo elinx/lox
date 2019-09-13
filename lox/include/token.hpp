@@ -121,15 +121,11 @@ private:
   size_t _len;
 };
 
-std::ostream &operator<<(std::ostream &os, const std::monostate &) {
-  return os;
-}
-
 std::ostream &operator<<(std::ostream &os, const Token &token) {
   os << " [line:" << token._line << ", " << token._start << ":" << token._len
      << "] ";
-  os << tokenName(token._type) << " " << token._lexeme;
-  std::visit([&](auto &&arg) { os << " " << arg; }, token._literal);
+  os << tokenName(token._type) << " " << token._lexeme << " ";
+  os << object::toString(token._literal);
   return os;
 }
 
