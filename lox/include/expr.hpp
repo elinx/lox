@@ -18,7 +18,7 @@ public:
   virtual void accept(Visitor &visitor) override { visitor.visit(*this); }
 
   Expr *left() { return _left; }
-  std::string lexme() { return _operator.lexme(); }
+  std::string op() { return _operator.lexme(); }
   Expr *right() { return _right; }
 
 private:
@@ -32,7 +32,8 @@ public:
   Assign(Token name, Expr *value) : _name(name), _value(value) {}
 
   virtual void accept(Visitor &visitor) override { visitor.visit(*this); }
-
+  std::string name() { return _name.lexme(); }
+  Expr *value() { return _value; }
 private:
   Token _name;
   Expr *_value;
@@ -67,7 +68,7 @@ public:
   Grouping(Expr *expression) : _expression(expression) {}
 
   virtual void accept(Visitor &visitor) override { visitor.visit(*this); }
-
+  Expr *expression() { return _expression; }
 private:
   Expr *_expression;
 };
@@ -136,6 +137,9 @@ public:
   Unary(Token op, Expr *right) : _operator(op), _right(right) {}
 
   virtual void accept(Visitor &visitor) override { visitor.visit(*this); }
+
+  std::string op() { return _operator.lexme(); }
+  Expr *right() { return _right; }
 
 private:
   Token _operator;

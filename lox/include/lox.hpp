@@ -40,9 +40,8 @@ public:
 
     Parser parser(tokens);
     Expr *expr = parser.parse();
-    AstVisitor vis;
-    vis.print(expr);
-    std::cout << vis.result() << std::endl;
+    AstPrintVisitor vis;
+    std::cout << vis.print(expr) << std::endl;
   }
 
   static void error(size_t line, std::string message) {
