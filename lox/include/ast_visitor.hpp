@@ -14,7 +14,7 @@ public:
     parenthesize(expr.op(), expr.left(), expr.right());
   }
   virtual void visit(Assign &expr) {
-    // parenthesize2("=", expr.name(), expr.value());
+    parenthesize2("=", expr.name(), expr.value());
   }
   virtual void visit(Call &expr) {}
   virtual void visit(Get &expr) {}
@@ -34,7 +34,7 @@ public:
   std::string result() { return _result; }
 
 private:
-  void parenthesize(std::string name, std::initializer_list<Expr *> exprs) {
+  void parenthesize(const std::string& name, std::initializer_list<Expr *> exprs) {
     _result += "(" + name;
     for (auto expr : exprs) {
       _result += " ";
@@ -48,6 +48,13 @@ private:
   template <typename... Ts>
   void parenthesize(std::string name, Ts &&... exprs) {
     parenthesize(name, {std::forward<Ts>(exprs)...});
+  }
+
+  void parenthesize2(const std::string& op, const std::string& name, Expr* value) {
+    _result += "(" + op + " " + name;
+      AstPrintVisitor vis;
+      _result += vis.print(value);
+    _result += ")";
   }
 
 private:

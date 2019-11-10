@@ -185,7 +185,7 @@ private:
     }
     std::string text = _source.substr(_start, _current - _start);
     auto type = keywordsTokenTypeLookup(text);
-    if (type > TK_EOF) {
+    if (type == TK_EOF) {
       type = TK_IDENTIFIER;
     }
     addToken(type);

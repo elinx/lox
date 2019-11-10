@@ -96,7 +96,12 @@ KeywordsTokenMap &keywordsMap() {
 };
 
 TokenType keywordsTokenTypeLookup(std::string keywords) {
-  return keywordsMap()[keywords];
+  auto maps = keywordsMap();
+  if (maps.contains(keywords)) {
+    return keywordsMap()[keywords];
+  } else {
+    return TK_EOF;
+  }
 }
 
 class Token {
