@@ -3,23 +3,23 @@
 
 #include "visitor.hpp"
 
-class Interpreter : public Visitor {
+class Interpreter : public ExprVisitor {
 public:
   void print(Expr *expr) { expr->accept(*this); }
-  virtual void visit(Binary &expr) {
+  virtual void visit(BinaryExpr &expr) {
   }
-  virtual void visit(Assign &expr) {}
-  virtual void visit(Call &expr) {}
-  virtual void visit(Get &expr) {}
-  virtual void visit(Grouping &expr) {}
-  virtual void visit(Literal &expr) {
+  virtual void visit(AssignExpr &expr) {}
+  virtual void visit(CallExpr &expr) {}
+  virtual void visit(GetExpr &expr) {}
+  virtual void visit(GroupingExpr &expr) {}
+  virtual void visit(LiteralExpr &expr) {
   }
-  virtual void visit(Logical &expr) {}
-  virtual void visit(Set &expr) {}
-  virtual void visit(Super &expr) {}
-  virtual void visit(This &expr) {}
-  virtual void visit(Unary &expr) {}
-  virtual void visit(Variable &expr) {}
+  virtual void visit(LogicalExpr &expr) {}
+  virtual void visit(SetExpr &expr) {}
+  virtual void visit(SuperExpr &expr) {}
+  virtual void visit(ThisExpr &expr) {}
+  virtual void visit(UnaryExpr &expr) {}
+  virtual void visit(VariableExpr &expr) {}
 
 private:
 };

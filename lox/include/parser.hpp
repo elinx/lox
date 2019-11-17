@@ -55,7 +55,7 @@ private:
     while (match({TK_BANG_EQUAL, TK_EQUAL_EQUAL})) {
       Token op = previous();
       Expr *right = comparison();
-      expr = new Binary(expr, op, right);
+      expr = new BinaryExpr(expr, op, right);
     }
     return expr;
   }
@@ -95,7 +95,7 @@ private:
     while (match({TK_GREATER, TK_GREATER_EQUAL, TK_LESS, TK_LESS_EQUAL})) {
       Token op = previous();
       Expr *right = addition();
-      expr = new Binary(expr, op, right);
+      expr = new BinaryExpr(expr, op, right);
     }
     return expr;
   }
@@ -106,7 +106,7 @@ private:
     while (match({TK_MINUS, TK_PLUS})) {
       Token op = previous();
       Expr *right = multiplication();
-      expr = new Binary(expr, op, right);
+      expr = new BinaryExpr(expr, op, right);
     }
 
     return expr;
@@ -118,7 +118,7 @@ private:
     while (match({TK_SLASH, TK_STAR})) {
       Token op = previous();
       Expr *right = unary();
-      expr = new Binary(expr, op, right);
+      expr = new BinaryExpr(expr, op, right);
     }
 
     return expr;
@@ -128,7 +128,7 @@ private:
     if (match({TK_BANG, TK_MINUS})) {
       Token op = previous();
       Expr *right = unary();
-      return new Unary(op, right);
+      return new UnaryExpr(op, right);
     }
 
     return primary();
@@ -136,20 +136,20 @@ private:
 
   Expr *primary() {
     if (match({TK_FALSE}))
-      return new Literal(false);
+      return new LiteralExpr(false);
     if (match({TK_TRUE}))
-      return new Literal(true);
+      return new LiteralExpr(true);
     if (match({TK_NIL}))
-      return new Literal({});
+      return new LiteralExpr({});
 
     if (match({TK_NUMBER, TK_STRING})) {
-      return new Literal(previous().literal());
+      return new LiteralExpr(previous().literal());
     }
 
     if (match({TK_LEFT_PAREN})) {
       Expr *expr = expression();
       consume(TK_RIGHT_PAREN, "Expect ')' after expression.");
-      return new Grouping(expr);
+      return new GroupingExpr(expr);
     }
     return nullptr;
   }

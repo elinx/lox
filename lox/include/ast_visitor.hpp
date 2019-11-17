@@ -4,32 +4,32 @@
 #include "visitor.hpp"
 #include <string>
 
-class AstPrintVisitor : public Visitor {
+class AstPrintVisitor : public ExprVisitor {
 public:
   std::string print(Expr *expr) {
     expr->accept(*this);
     return result();
   }
-  virtual void visit(Binary &expr) {
-    parenthesize(expr.op(), expr.left(), expr.right());
+  virtual void visit(BinaryExpr *expr) {
+    parenthesize(expr->op(), expr->left(), expr->right());
   }
-  virtual void visit(Assign &expr) {
-    parenthesize2("=", expr.name(), expr.value());
+  virtual void visit(AssignExpr *expr) {
+    parenthesize2("=", expr->name(), expr->value());
   }
-  virtual void visit(Call &expr) {}
-  virtual void visit(Get &expr) {}
-  virtual void visit(Grouping &expr) {
-    parenthesize("group", expr.expression());
+  virtual void visit(CallExpr *expr) {}
+  virtual void visit(GetExpr *expr) {}
+  virtual void visit(GroupingExpr *expr) {
+    parenthesize("group", expr->expression());
   }
-  virtual void visit(Literal &expr) { _result += expr.toString(); }
-  virtual void visit(Logical &expr) {}
-  virtual void visit(Set &expr) {}
-  virtual void visit(Super &expr) {}
-  virtual void visit(This &expr) {}
-  virtual void visit(Unary &expr) {
-    parenthesize(expr.op(), expr.right());
+  virtual void visit(LiteralExpr *expr) { _result += expr->toString(); }
+  virtual void visit(LogicalExpr *expr) {}
+  virtual void visit(SetExpr *expr) {}
+  virtual void visit(SuperExpr *expr) {}
+  virtual void visit(ThisExpr *expr) {}
+  virtual void visit(UnaryExpr *expr) {
+    parenthesize(expr->op(), expr->right());
   }
-  virtual void visit(Variable &expr) {}
+  virtual void visit(VariableExpr *expr) {}
 
   std::string result() { return _result; }
 
