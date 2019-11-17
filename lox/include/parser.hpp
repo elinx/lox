@@ -3,6 +3,7 @@
 
 #include "expr.hpp"
 #include "token.hpp"
+#include "stmt.hpp"
 #include <list>
 
 /** Parser of lox
@@ -21,9 +22,33 @@
 class Parser {
 public:
   Parser(std::list<Token> tokens) : _tokens(tokens), _current(0) {}
-  Expr *parse() { return expression(); }
+  std::list<Stmt*> parse() {
+    std::list<Stmt*> stmts;
+    while (!isAtEnd()) {
+      stmts.push_back(statement());
+    }
+    return stmts;
+  }
 private:
   Expr *expression() { return equality(); }
+  Stmt *statement() {
+    if (match({TK_PRINT})) {
+      return printStatement();
+    }
+    return expressionStatement();
+  }
+
+  Stmt *printStatement() {
+    Expr *value = expression();
+    consume(TK_SEMICOLON, "Expect ';' after value of `print`.");
+    return new PrintStmt(value);
+  }
+
+  Stmt *expressionStatement() {
+    Expr *expr = expression();
+    consume(TK_SEMICOLON, "Expect ';' after expression.");
+    return new ExprStmt(expr);
+  }
 
   Expr *equality() {
     Expr *expr = comparison();
