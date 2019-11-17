@@ -30,4 +30,13 @@ public:
   virtual void visit(VariableExpr *expr) = 0;
 };
 
+class PrintStmt;
+class ExprStmt;
+
+class StmtVisitor {
+public:
+  virtual void visit(PrintStmt *stmt) = 0;
+  virtual void visit(ExprStmt *stmt) = 0;
+};
+
 #endif

@@ -8,6 +8,7 @@
 #include "scanner.hpp"
 #include "parser.hpp"
 #include "ast_visitor.hpp"
+#include "interpreter.hpp"
 
 class Lox {
 private:
@@ -43,6 +44,8 @@ public:
     // Expr *expr = parser.parse();
     // AstPrintVisitor vis;
     // std::cout << vis.print(expr) << std::endl;
+
+    Interpreter interpreter;
   }
 
   static void error(size_t line, std::string message) {
