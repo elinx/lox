@@ -1,6 +1,8 @@
 #ifndef _VISITOR_HPP_
 #define _VISITOR_HPP_
 
+#include <any>
+
 class BinaryExpr;
 class AssignExpr;
 class CallExpr;
@@ -16,18 +18,18 @@ class VariableExpr;
 
 class ExprVisitor {
 public:
-  virtual void visit(BinaryExpr *expr) = 0;
-  virtual void visit(AssignExpr *expr) = 0;
-  virtual void visit(CallExpr *expr) = 0;
-  virtual void visit(GetExpr *expr) = 0;
-  virtual void visit(GroupingExpr *expr) = 0;
-  virtual void visit(LiteralExpr *expr) = 0;
-  virtual void visit(LogicalExpr *expr) = 0;
-  virtual void visit(SetExpr *expr) = 0;
-  virtual void visit(SuperExpr *expr) = 0;
-  virtual void visit(ThisExpr *expr) = 0;
-  virtual void visit(UnaryExpr *expr) = 0;
-  virtual void visit(VariableExpr *expr) = 0;
+  virtual std::any visit(BinaryExpr *expr) = 0;
+  virtual std::any visit(AssignExpr *expr) = 0;
+  virtual std::any visit(CallExpr *expr) = 0;
+  virtual std::any visit(GetExpr *expr) = 0;
+  virtual std::any visit(GroupingExpr *expr) = 0;
+  virtual std::any visit(LiteralExpr *expr) = 0;
+  virtual std::any visit(LogicalExpr *expr) = 0;
+  virtual std::any visit(SetExpr *expr) = 0;
+  virtual std::any visit(SuperExpr *expr) = 0;
+  virtual std::any visit(ThisExpr *expr) = 0;
+  virtual std::any visit(UnaryExpr *expr) = 0;
+  virtual std::any visit(VariableExpr *expr) = 0;
 };
 
 class PrintStmt;

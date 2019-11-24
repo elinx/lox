@@ -40,12 +40,12 @@ public:
     }
 
     Parser parser(tokens);
-    auto statements = parser.parse();
-    // Expr *expr = parser.parse();
-    // AstPrintVisitor vis;
-    // std::cout << vis.print(expr) << std::endl;
+    // auto statements = parser.parse();
+    Expr *expr = parser.parse1();
+    AstPrintVisitor vis;
+    std::cout << std::any_cast<std::string>(expr->accept(vis)) << std::endl;
 
-    Interpreter interpreter;
+    // Interpreter interpreter;
   }
 
   static void error(size_t line, std::string message) {

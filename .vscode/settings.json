@@ -46,6 +46,7 @@
         "vector": "cpp",
         "xhash": "cpp",
         "cctype": "cpp",
-        "concepts": "cpp"
+        "concepts": "cpp",
+        "any": "cpp"
     }
 }

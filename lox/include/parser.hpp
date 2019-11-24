@@ -29,6 +29,7 @@ public:
     }
     return stmts;
   }
+  Expr *parse1() { return equality(); }
 private:
   Expr *expression() { return equality(); }
   Stmt *statement() {

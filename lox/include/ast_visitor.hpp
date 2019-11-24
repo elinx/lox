@@ -6,59 +6,49 @@
 
 class AstPrintVisitor : public ExprVisitor {
 public:
-  std::string print(Expr *expr) {
-    expr->accept(*this);
-    return result();
+  virtual std::any visit(BinaryExpr *expr) {
+    return parenthesize(expr->op(), expr->left(), expr->right());
   }
-  virtual void visit(BinaryExpr *expr) {
-    parenthesize(expr->op(), expr->left(), expr->right());
+  virtual std::any visit(AssignExpr *expr) {
+    return parenthesize2("=", expr->name(), expr->value());
   }
-  virtual void visit(AssignExpr *expr) {
-    parenthesize2("=", expr->name(), expr->value());
+  virtual std::any visit(CallExpr *expr) { return std::any{}; }
+  virtual std::any visit(GetExpr *expr) { return std::any{}; }
+  virtual std::any visit(GroupingExpr *expr) {
+    return parenthesize("group", expr->expression());
   }
-  virtual void visit(CallExpr *expr) {}
-  virtual void visit(GetExpr *expr) {}
-  virtual void visit(GroupingExpr *expr) {
-    parenthesize("group", expr->expression());
+  virtual std::any visit(LiteralExpr *expr) { return expr->toString(); }
+  virtual std::any visit(LogicalExpr *expr) { return std::any{}; }
+  virtual std::any visit(SetExpr *expr) { return std::any{}; }
+  virtual std::any visit(SuperExpr *expr) { return std::any{}; }
+  virtual std::any visit(ThisExpr *expr) { return std::any{}; }
+  virtual std::any visit(UnaryExpr *expr) {
+    return parenthesize(expr->op(), expr->right());
   }
-  virtual void visit(LiteralExpr *expr) { _result += expr->toString(); }
-  virtual void visit(LogicalExpr *expr) {}
-  virtual void visit(SetExpr *expr) {}
-  virtual void visit(SuperExpr *expr) {}
-  virtual void visit(ThisExpr *expr) {}
-  virtual void visit(UnaryExpr *expr) {
-    parenthesize(expr->op(), expr->right());
-  }
-  virtual void visit(VariableExpr *expr) {}
-
-  std::string result() { return _result; }
+  virtual std::any visit(VariableExpr *expr) { return std::any{}; }
 
 private:
-  void parenthesize(const std::string& name, std::initializer_list<Expr *> exprs) {
-    _result += "(" + name;
+  std::string parenthesize(const std::string& name, std::initializer_list<Expr *> exprs) {
+    std::string res{"(" + name};
     for (auto expr : exprs) {
-      _result += " ";
-      AstPrintVisitor vis;
-      expr->accept(vis);
-      _result += vis.result();
+      res += " ";
+      res += std::any_cast<std::string>(expr->accept(*this));
     }
-    _result += ")";
+    res += ")";
+    return res;
   }
 
   template <typename... Ts>
-  void parenthesize(std::string name, Ts &&... exprs) {
-    parenthesize(name, {std::forward<Ts>(exprs)...});
+  std::string parenthesize(std::string name, Ts &&... exprs) {
+    return parenthesize(name, {std::forward<Ts>(exprs)...});
   }
 
-  void parenthesize2(const std::string& op, const std::string& name, Expr* value) {
-    _result += "(" + op + " " + name;
-      AstPrintVisitor vis;
-      _result += vis.print(value);
-    _result += ")";
+  std::string parenthesize2(const std::string& op, const std::string& name, Expr* value) {
+    std::string res{"(" + op + " " + name};
+    res += std::any_cast<std::string>(value->accept(*this));
+    res += ")";
+    return res;
   }
-
-private:
-  std::string _result;
 };
 
 #endif
