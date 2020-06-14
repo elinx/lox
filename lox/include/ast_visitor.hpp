@@ -12,23 +12,30 @@ public:
   virtual std::any visit(AssignExpr *expr) {
     return parenthesize2("=", expr->name(), expr->value());
   }
-  virtual std::any visit(CallExpr *expr) { return std::any{}; }
+  virtual std::any visit(CallExpr *expr) {
+    return {};
+  }
   virtual std::any visit(GetExpr *expr) { return std::any{}; }
   virtual std::any visit(GroupingExpr *expr) {
     return parenthesize("group", expr->expression());
   }
   virtual std::any visit(LiteralExpr *expr) { return expr->toString(); }
-  virtual std::any visit(LogicalExpr *expr) { return std::any{}; }
+  virtual std::any visit(LogicalExpr *expr) {
+    return parenthesize(expr->name(), expr->left(), expr->right());
+  }
   virtual std::any visit(SetExpr *expr) { return std::any{}; }
-  virtual std::any visit(SuperExpr *expr) { return std::any{}; }
-  virtual std::any visit(ThisExpr *expr) { return std::any{}; }
+  virtual std::any visit(SuperExpr *expr) {
+    return {};
+  }
+  virtual std::any visit(ThisExpr *expr) { return std::string{"this"}; }
   virtual std::any visit(UnaryExpr *expr) {
     return parenthesize(expr->op(), expr->right());
   }
   virtual std::any visit(VariableExpr *expr) { return std::any{}; }
 
 private:
-  std::string parenthesize(const std::string& name, std::initializer_list<Expr *> exprs) {
+  std::string parenthesize(const std::string &name,
+                           std::initializer_list<Expr *> exprs) {
     std::string res{"(" + name};
     for (auto expr : exprs) {
       res += " ";
@@ -43,7 +50,8 @@ private:
     return parenthesize(name, {std::forward<Ts>(exprs)...});
   }
 
-  std::string parenthesize2(const std::string& op, const std::string& name, Expr* value) {
+  std::string parenthesize2(const std::string &op, const std::string &name,
+                            Expr *value) {
     std::string res{"(" + op + " " + name};
     res += std::any_cast<std::string>(value->accept(*this));
     res += ")";

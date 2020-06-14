@@ -46,7 +46,8 @@ public:
       : _callee(callee), _paren(paren), _arguments(arguments) {}
 
   virtual std::any accept(ExprVisitor &visitor) override { return visitor.visit(this); }
-
+  Expr *callee() { return _callee; }
+  std::list<Expr *> arguments() { return _arguments; }
 private:
   Expr *_callee;
   Token _paren;
@@ -92,7 +93,9 @@ public:
       : _left(left), _operator(op), _right(right) {}
 
   virtual std::any accept(ExprVisitor &visitor) override { return visitor.visit(this); }
-
+  std::string name() {return _operator.lexme(); }
+  Expr *left() { return _left; }
+  Expr *right() { return _right; }
 private:
   Expr *_left;
   Token _operator;
@@ -117,7 +120,7 @@ public:
   SuperExpr(Token keyword, Token method) : _keyword(keyword), _method(method) {}
 
   virtual std::any accept(ExprVisitor &visitor) override { return visitor.visit(this); }
-
+  std::string method() { return _method.lexme(); }
 private:
   Token _keyword;
   Token _method;
