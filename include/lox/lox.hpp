@@ -5,10 +5,10 @@
 #include <fstream>
 #include <iostream>
 
-#include "scanner.hpp"
-#include "parser.hpp"
-#include "ast_visitor.hpp"
-#include "interpreter.hpp"
+#include <lox/scanner.hpp>
+#include <lox/parser.hpp>
+#include <lox/ast_visitor.hpp>
+#include <lox/interpreter.hpp>
 
 class Lox {
 private:

@@ -1,9 +1,10 @@
 #ifndef _EXPR_HPP_
 #define _EXPR_HPP_
 
-#include "token.hpp"
-#include "visitor.hpp"
 #include <list>
+
+#include <lox/token.hpp>
+#include <lox/visitor.hpp>
 
 class Expr {
 public:

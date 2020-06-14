@@ -1,6 +1,8 @@
 #ifndef _VISITOR_HPP_
 #define _VISITOR_HPP_
 
+#include <lox/object.hpp>
+
 class BinaryExpr;
 class AssignExpr;
 class CallExpr;

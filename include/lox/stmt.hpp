@@ -1,7 +1,7 @@
 #ifndef _STMT_HPP_
 #define _STMT_HPP_
 
-#include "expr.hpp"
+#include <lox/expr.hpp>
 
 class Stmt {
 

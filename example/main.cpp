@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "lox.hpp"
+#include <lox/lox.hpp>
 
 int main(int argc, char **argv) {
   Lox lox;

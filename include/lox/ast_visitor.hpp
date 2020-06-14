@@ -1,8 +1,9 @@
 #ifndef _AST_VISITOR_HPP_
 #define _AST_VISITOR_HPP_
 
-#include "visitor.hpp"
 #include <string>
+
+#include <lox/visitor.hpp>
 
 class AstPrintVisitor : public ExprVisitor {
 public:

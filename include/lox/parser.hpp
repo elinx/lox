@@ -1,10 +1,11 @@
 #ifndef _PARSER_HPP_
 #define _PARSER_HPP_
 
-#include "expr.hpp"
-#include "token.hpp"
-#include "stmt.hpp"
 #include <list>
+
+#include <lox/expr.hpp>
+#include <lox/token.hpp>
+#include <lox/stmt.hpp>
 
 /** Parser of lox
  *

@@ -1,7 +1,7 @@
 #ifndef _INTERPRETER_HPP_
 #define _INTERPRETER_HPP_
 
-#include "visitor.hpp"
+#include <lox/visitor.hpp>
 
 class Interpreter : public ExprVisitor, StmtVisitor {
 public:

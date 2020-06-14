@@ -1,11 +1,12 @@
 #ifndef _SCANNER_HPP_
 #define _SCANNER_HPP_
 
-#include "lox.hpp"
-#include "token.hpp"
 #include <algorithm>
 #include <list>
 #include <string>
+
+#include <lox/lox.hpp>
+#include <lox/token.hpp>
 
 class Scanner {
 private:

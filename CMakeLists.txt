@@ -3,6 +3,6 @@ project(lox)
 
 set(CMAKE_CXX_STANDARD 20)
 add_subdirectory(dependency)
-add_subdirectory(lox)
+add_subdirectory(include)
 add_subdirectory(example)
 
