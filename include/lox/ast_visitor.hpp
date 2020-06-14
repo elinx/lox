@@ -4,6 +4,9 @@
 #include <string>
 
 #include <lox/visitor.hpp>
+#include <lox/expr.hpp>
+
+namespace lox {
 
 class AstPrintVisitor : public ExprVisitor {
 public:
@@ -56,4 +59,5 @@ private:
   }
 };
 
+} // namespace lox
 #endif

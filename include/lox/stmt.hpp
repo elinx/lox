@@ -3,13 +3,13 @@
 
 #include <lox/expr.hpp>
 
-class Stmt {
-
-};
+namespace lox {
+class Stmt {};
 
 class PrintStmt : public Stmt {
 public:
   PrintStmt(Expr *value) : _value{value} {}
+
 private:
   Expr *_value;
 };
@@ -17,8 +17,10 @@ private:
 class ExprStmt : public Stmt {
 public:
   ExprStmt(Expr *expr) : _expr(expr) {}
+
 private:
   Expr *_expr;
 };
 
+} // namespace lox
 #endif

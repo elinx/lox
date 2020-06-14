@@ -2,6 +2,8 @@
 
 #include <lox/lox.hpp>
 
+using lox::Lox;
+
 int main(int argc, char **argv) {
   Lox lox;
   if (argc > 1) {

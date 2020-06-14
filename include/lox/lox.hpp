@@ -5,11 +5,12 @@
 #include <fstream>
 #include <iostream>
 
-#include <lox/scanner.hpp>
-#include <lox/parser.hpp>
 #include <lox/ast_visitor.hpp>
 #include <lox/interpreter.hpp>
+#include <lox/parser.hpp>
+#include <lox/scanner.hpp>
 
+namespace lox {
 class Lox {
 private:
 public:
@@ -59,4 +60,5 @@ public:
   }
 };
 
+} // namespace lox
 #endif

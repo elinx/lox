@@ -8,6 +8,8 @@
 
 #include <lox/object.hpp>
 
+namespace lox {
+
 enum TokenType {
   // Single-character tokens.
   TK_LEFT_PAREN = 0,
@@ -134,4 +136,5 @@ std::ostream &operator<<(std::ostream &os, const Token &token) {
   return os;
 }
 
+} // namespace lox
 #endif

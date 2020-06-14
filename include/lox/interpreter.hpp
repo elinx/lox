@@ -2,6 +2,7 @@
 #define _INTERPRETER_HPP_
 
 #include <lox/visitor.hpp>
+namespace lox {
 
 class Interpreter : public ExprVisitor, StmtVisitor {
 public:
@@ -24,4 +25,5 @@ public:
 private:
 };
 
+} // namespace lox
 #endif // !_INTERPRETER_HPP_

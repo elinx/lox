@@ -4,8 +4,10 @@
 #include <list>
 
 #include <lox/expr.hpp>
-#include <lox/token.hpp>
 #include <lox/stmt.hpp>
+#include <lox/token.hpp>
+
+namespace lox {
 
 /** Parser of lox
  *
@@ -23,14 +25,15 @@
 class Parser {
 public:
   Parser(std::list<Token> tokens) : _tokens(tokens), _current(0) {}
-  std::list<Stmt*> parse() {
-    std::list<Stmt*> stmts;
+  std::list<Stmt *> parse() {
+    std::list<Stmt *> stmts;
     while (!isAtEnd()) {
       stmts.push_back(statement());
     }
     return stmts;
   }
   Expr *parse1() { return equality(); }
+
 private:
   Expr *expression() { return equality(); }
   Stmt *statement() {
@@ -157,7 +160,9 @@ private:
   }
 
   Token consume(TokenType type, std::string str) {
-    if (check(type)) { return advance(); }
+    if (check(type)) {
+      return advance();
+    }
     std::cout << "parse error\n";
     exit(1);
   }
@@ -167,4 +172,5 @@ private:
   size_t _current;
 };
 
+} // namespace lox
 #endif

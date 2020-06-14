@@ -8,6 +8,8 @@
 #include <lox/lox.hpp>
 #include <lox/token.hpp>
 
+namespace lox {
+
 class Scanner {
 private:
   std::string _source;
@@ -193,4 +195,5 @@ private:
   }
 };
 
+}
 #endif // !_SCANNER_HPP_
