@@ -57,6 +57,21 @@
         "deque": "cpp",
         "memory_resource": "cpp",
         "string_view": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "format": "cpp",
+        "chrono": "cpp",
+        "complex": "cpp",
+        "ctime": "cpp",
+        "forward_list": "cpp",
+        "unordered_set": "cpp",
+        "functional": "cpp",
+        "map": "cpp",
+        "numeric": "cpp",
+        "ratio": "cpp",
+        "set": "cpp",
+        "iomanip": "cpp",
+        "thread": "cpp",
+        "typeindex": "cpp",
+        "valarray": "cpp"
     }
 }

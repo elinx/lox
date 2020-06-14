@@ -6,28 +6,28 @@
 
 class AstPrintVisitor : public ExprVisitor {
 public:
-  virtual std::any visit(const BinaryExpr &expr) {
+  virtual Object visit(const BinaryExpr &expr) {
     return parenthesize(expr.op(), expr.left(), expr.right());
   }
-  virtual std::any visit(const AssignExpr &expr) {
+  virtual Object visit(const AssignExpr &expr) {
     return parenthesize2("=", expr.name(), expr.value());
   }
-  virtual std::any visit(const CallExpr &expr) { return {}; }
-  virtual std::any visit(const GetExpr &expr) { return {}; }
-  virtual std::any visit(const GroupingExpr &expr) {
+  virtual Object visit(const CallExpr &expr) { return {}; }
+  virtual Object visit(const GetExpr &expr) { return {}; }
+  virtual Object visit(const GroupingExpr &expr) {
     return parenthesize("group", expr.expression());
   }
-  virtual std::any visit(const LiteralExpr &expr) { return expr.toString(); }
-  virtual std::any visit(const LogicalExpr &expr) {
+  virtual Object visit(const LiteralExpr &expr) { return expr.toString(); }
+  virtual Object visit(const LogicalExpr &expr) {
     return parenthesize(expr.name(), expr.left(), expr.right());
   }
-  virtual std::any visit(const SetExpr &expr) { return {}; }
-  virtual std::any visit(const SuperExpr &expr) { return {}; }
-  virtual std::any visit(const ThisExpr &expr) { return std::string{"this"}; }
-  virtual std::any visit(const UnaryExpr &expr) {
+  virtual Object visit(const SetExpr &expr) { return {}; }
+  virtual Object visit(const SuperExpr &expr) { return {}; }
+  virtual Object visit(const ThisExpr &expr) { return std::string{"this"}; }
+  virtual Object visit(const UnaryExpr &expr) {
     return parenthesize(expr.op(), expr.right());
   }
-  virtual std::any visit(const VariableExpr &expr) { return {}; }
+  virtual Object visit(const VariableExpr &expr) { return {}; }
 
 private:
   std::string parenthesize(const std::string &name,
@@ -35,7 +35,7 @@ private:
     std::string res{"(" + name};
     for (auto expr : exprs) {
       res += " ";
-      res += std::any_cast<std::string>(expr->accept(*this));
+      res += object::toString(expr->accept(*this));
     }
     res += ")";
     return res;
@@ -49,7 +49,7 @@ private:
   std::string parenthesize2(const std::string &op, const std::string &name,
                             Expr *value) {
     std::string res{"(" + op + " " + name};
-    res += std::any_cast<std::string>(value->accept(*this));
+    res += object::toString(value->accept(*this));
     res += ")";
     return res;
   }

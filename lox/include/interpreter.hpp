@@ -2,22 +2,21 @@
 #define _INTERPRETER_HPP_
 
 #include "visitor.hpp"
-#include <any>
 
 class Interpreter : public ExprVisitor, StmtVisitor {
 public:
-  virtual std::any visit(BinaryExpr *expr) { return std::any{}; }
-  virtual std::any visit(AssignExpr *expr) { return std::any{}; }
-  virtual std::any visit(CallExpr *expr) { return std::any{}; }
-  virtual std::any visit(GetExpr *expr) { return std::any{}; }
-  virtual std::any visit(GroupingExpr *expr) { return std::any{}; }
-  virtual std::any visit(LiteralExpr *expr) { return std::any{}; }
-  virtual std::any visit(LogicalExpr *expr) { return std::any{}; }
-  virtual std::any visit(SetExpr *expr) { return std::any{}; }
-  virtual std::any visit(SuperExpr *expr) { return std::any{}; }
-  virtual std::any visit(ThisExpr *expr) { return std::any{}; }
-  virtual std::any visit(UnaryExpr *expr) { return std::any{}; }
-  virtual std::any visit(VariableExpr *expr) { return std::any{}; }
+  virtual Object visit(BinaryExpr *expr) { return std::monostate{}; }
+  virtual Object visit(AssignExpr *expr) { return std::monostate{}; }
+  virtual Object visit(CallExpr *expr) { return std::monostate{}; }
+  virtual Object visit(GetExpr *expr) { return std::monostate{}; }
+  virtual Object visit(GroupingExpr *expr) { return std::monostate{}; }
+  virtual Object visit(LiteralExpr *expr) { return std::monostate{}; }
+  virtual Object visit(LogicalExpr *expr) { return std::monostate{}; }
+  virtual Object visit(SetExpr *expr) { return std::monostate{}; }
+  virtual Object visit(SuperExpr *expr) { return std::monostate{}; }
+  virtual Object visit(ThisExpr *expr) { return std::monostate{}; }
+  virtual Object visit(UnaryExpr *expr) { return std::monostate{}; }
+  virtual Object visit(VariableExpr *expr) { return std::monostate{}; }
 
   virtual void visit(PrintStmt *stmt) {}
   virtual void visit(ExprStmt *stmt) {}

@@ -43,7 +43,7 @@ public:
     // auto statements = parser.parse();
     Expr *expr = parser.parse1();
     AstPrintVisitor vis;
-    std::cout << std::any_cast<std::string>(expr->accept(vis)) << std::endl;
+    std::cout << object::toString(expr->accept(vis)) << std::endl;
 
     // Interpreter interpreter;
   }
