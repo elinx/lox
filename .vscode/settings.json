@@ -47,6 +47,16 @@
         "xhash": "cpp",
         "cctype": "cpp",
         "concepts": "cpp",
-        "any": "cpp"
+        "any": "cpp",
+        "optional": "cpp",
+        "atomic": "cpp",
+        "*.tcc": "cpp",
+        "clocale": "cpp",
+        "cstdarg": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "memory_resource": "cpp",
+        "string_view": "cpp",
+        "sstream": "cpp"
     }
 }

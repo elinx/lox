@@ -1,2 +1,2 @@
-add_library(loxlib include/lox.hpp)
-set_property(TARGET loxlib PROPERTY LINKER_LANGUAGE CXX)
+add_library(loxlib  INTERFACE)
+target_include_directories(loxlib INTERFACE include)

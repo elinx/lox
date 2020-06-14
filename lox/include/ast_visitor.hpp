@@ -6,32 +6,28 @@
 
 class AstPrintVisitor : public ExprVisitor {
 public:
-  virtual std::any visit(BinaryExpr *expr) {
-    return parenthesize(expr->op(), expr->left(), expr->right());
+  virtual std::any visit(const BinaryExpr &expr) {
+    return parenthesize(expr.op(), expr.left(), expr.right());
   }
-  virtual std::any visit(AssignExpr *expr) {
-    return parenthesize2("=", expr->name(), expr->value());
+  virtual std::any visit(const AssignExpr &expr) {
+    return parenthesize2("=", expr.name(), expr.value());
   }
-  virtual std::any visit(CallExpr *expr) {
-    return {};
+  virtual std::any visit(const CallExpr &expr) { return {}; }
+  virtual std::any visit(const GetExpr &expr) { return {}; }
+  virtual std::any visit(const GroupingExpr &expr) {
+    return parenthesize("group", expr.expression());
   }
-  virtual std::any visit(GetExpr *expr) { return std::any{}; }
-  virtual std::any visit(GroupingExpr *expr) {
-    return parenthesize("group", expr->expression());
+  virtual std::any visit(const LiteralExpr &expr) { return expr.toString(); }
+  virtual std::any visit(const LogicalExpr &expr) {
+    return parenthesize(expr.name(), expr.left(), expr.right());
   }
-  virtual std::any visit(LiteralExpr *expr) { return expr->toString(); }
-  virtual std::any visit(LogicalExpr *expr) {
-    return parenthesize(expr->name(), expr->left(), expr->right());
+  virtual std::any visit(const SetExpr &expr) { return {}; }
+  virtual std::any visit(const SuperExpr &expr) { return {}; }
+  virtual std::any visit(const ThisExpr &expr) { return std::string{"this"}; }
+  virtual std::any visit(const UnaryExpr &expr) {
+    return parenthesize(expr.op(), expr.right());
   }
-  virtual std::any visit(SetExpr *expr) { return std::any{}; }
-  virtual std::any visit(SuperExpr *expr) {
-    return {};
-  }
-  virtual std::any visit(ThisExpr *expr) { return std::string{"this"}; }
-  virtual std::any visit(UnaryExpr *expr) {
-    return parenthesize(expr->op(), expr->right());
-  }
-  virtual std::any visit(VariableExpr *expr) { return std::any{}; }
+  virtual std::any visit(const VariableExpr &expr) { return {}; }
 
 private:
   std::string parenthesize(const std::string &name,

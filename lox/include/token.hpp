@@ -113,7 +113,7 @@ public:
 
   TokenType type() { return _type; }
   Object literal() { return _literal; }
-  std::string lexme() { return _lexeme; }
+  std::string lexme() const { return _lexeme; }
 
   friend std::ostream &operator<<(std::ostream &os, const Token &token);
 
